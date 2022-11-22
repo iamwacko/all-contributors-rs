@@ -1,6 +1,6 @@
 #![forbid(unsafe_code)]
 
-use all_contributors_rs::init;
+use all_contributors_rs::{init, generate, check, add};
 use clap::{arg, command, Arg, Command};
 
 fn main() {
@@ -26,15 +26,21 @@ fn main() {
 
     let matched = cmd.clone().get_matches();
 
-    if let Some(matching) = matched.subcommand_matches("generate") {}
+    if let Some(matching) = matched.subcommand_matches("generate") {
+        generate::generate()
+    }
 
-    if let Some(matching) = matched.subcommand_matches("add") {}
+    if let Some(matching) = matched.subcommand_matches("add") {
+        add::add();
+    }
 
     if let Some(matching) = matched.subcommand_matches("init") {
         init::init();
     }
 
-    if let Some(matching) = matched.subcommand_matches("check") {}
+    if let Some(matching) = matched.subcommand_matches("check") {
+        check::check();
+    }
 
     if (matched.subcommand_matches("generate") == None)
         && (matched.subcommand_matches("add") == None)
